@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const ScreenContainer = styled.div`
   width: 400px;
   min-width: 400px;
