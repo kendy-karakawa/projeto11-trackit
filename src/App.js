@@ -5,10 +5,12 @@ import CadastroPag from "./pages/CadastroPag/CadastroPag"
 import HojePag from "./pages/HojePag/HojePag"
 import HistoricoPag from "./pages/HistoricoPag/HistoricoPag"
 import HabitoPag from "./pages/HabitoPag/HabitoPag"
+import AuthProvider from "./contexts/auth"
 
 
 export default function App(){
   return (
+    <AuthProvider>
     <BrowserRouter >
     <Container>
     <Routes>
@@ -18,12 +20,13 @@ export default function App(){
      <Route path="/habitos" element={<HabitoPag />}/>
      <Route path="/hoje" element={<HojePag />}/>
      <Route path="/historicos" element={<HistoricoPag />}/>
-
+    
     
    
     </Routes>
     </Container>
     </BrowserRouter>
+    </AuthProvider>
   )
 }
 

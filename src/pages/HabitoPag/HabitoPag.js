@@ -1,23 +1,26 @@
 import Header from "../../components/Header";
-import styled from "styled-components";
+import { ScreenContainer, Title,Coment } from "./style";
 import Menu from "../../components/Menu";
+import Habito from "../../components/Habito";
+import SetHabito from "../../components/SetHabito";
 
-export default function HabitoPag(){
-    return (
-        <ScreenContainer>
-        <Header />
-        <Menu />
-        </ScreenContainer>
-    )
+export default function HabitoPag() {
+  return (
+    <>
+      <Header />
+      <ScreenContainer>
+        <Title>
+          <p>Meus hábitos</p>
+          <button> + </button>
+        </Title>
+        <SetHabito />
+        <Habito />
+        <Habito />
+        <Habito />
+        <Coment>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Coment>
+      </ScreenContainer>
+      <Menu />
+    </>
+  );
 }
 
-const ScreenContainer = styled.div`
-  width: 400px;
-  min-width: 400px;
-  min-height: 100vh;
-  background-color: #F2F2F2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  ` 

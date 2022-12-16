@@ -1,10 +1,11 @@
 import Logo from "../../styles/img/logo.png";
 import { ScreenContainer, Form } from "./style";
 import { BASE_URL } from "../../constants/urls";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
+import { AuthContext } from "../../contexts/auth";
 
 
 export default function LoginPag() {
@@ -13,6 +14,7 @@ export default function LoginPag() {
   const [loarding, setLoarding] = useState(false);
   const [disable, setDisable] = useState(false);
   const navigate = useNavigate();
+  const { setDadosUsuario } = useContext(AuthContext)
 
   function login(e) {
     e.preventDefault();
@@ -26,9 +28,9 @@ export default function LoginPag() {
   }
 
   function resposta(res) {
-    alert("logado com sucesso");
-    console.log(res.data)
-    //navigate("/hoje");
+    alert("logado com sucesso"); // remover isso depois  ****************** LEMBRETE*************
+    setDadosUsuario(res.data)
+    navigate("/habitos");
     setLoarding(false);
     setDisable(false);
   }
@@ -41,6 +43,7 @@ export default function LoginPag() {
 
   return (
     <ScreenContainer>
+      
       <img src={Logo} alt="Logo" />
       <Form onSubmit={login}>
         <input

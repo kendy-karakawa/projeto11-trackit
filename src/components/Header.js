@@ -1,11 +1,16 @@
 import styled from "styled-components";
 import Logo2 from "../../src/styles/img/logo2.png";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/auth";
+
 
 export default function Header() {
+  const {dadosUsuario} = useContext(AuthContext)
+
   return (
     <HeaderContainer>
       <img src={Logo2} alt="logo" />
-      <Foto src="" alt="Foto" />
+      <Foto src={dadosUsuario.image} alt="Foto" />
     </HeaderContainer>
   );
 }
