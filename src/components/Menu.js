@@ -2,27 +2,36 @@ import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Menu() {
   const [percentage, setPercentage] = useState(40);
   return (
     <MenuContainer>
-      <p>Hábitos</p>
-      <div>
-        <CircularProgressbar
-          value={percentage}
-          text="Hoje"
-          background
-          backgroundPadding={6}
-          styles={buildStyles({
-            backgroundColor: "#3e98c7",
-            textColor: "#fff",
-            pathColor: "#fff",
-            trailColor: "transparent",
-          })}
-        />
-      </div>
-      <p>Histórico</p>
+      <Link to="/habitos">
+        <p>Hábitos</p>
+      </Link>
+      
+        <div >
+        <Link to="/hoje">
+          <CircularProgressbar
+            value={percentage}
+            text="Hoje"
+            background
+            backgroundPadding={6}
+            styles={buildStyles({
+              backgroundColor: "#3e98c7",
+              textColor: "#fff",
+              pathColor: "#fff",
+              trailColor: "transparent",
+            })}
+          />
+          </Link>
+        </div>
+      
+      <Link to="/historicos">
+        <p>Histórico</p>
+      </Link>
     </MenuContainer>
   );
 }
@@ -51,5 +60,8 @@ const MenuContainer = styled.div`
     width: 150px;
     height: 150px;
     padding: 10px;
+  }
+  a{
+    text-decoration:none;
   }
 `;

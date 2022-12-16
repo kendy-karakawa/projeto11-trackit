@@ -3,3 +3,7 @@
 //https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits
 
 export const BASE_URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/"
+
+
+// **LISTA DE HABITO*** https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits   
+// **CRIAR HABITOS****  https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits

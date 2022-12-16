@@ -1,8 +1,17 @@
 import { useState } from "react";
 import styled from "styled-components";
+import DiaSemana from "./DiaSemana";
 
 export default function SetHabito() {
   const [nome, setNome] = useState("");
+  const [days, setDays ] = useState([])
+  const diaSemana = [{id:1, name:'S'},{id:2, name:'T'},{id:3, name:'Q'},{id:4, name:'Q'},{id:5, name:'S'},{id:6, name:'S'},{id:7, name:'D'}]
+
+  console.log(days)
+
+  // function selectDays(value){
+  //   setDays([...days, value])
+  // }
 
   return (
     <Container>
@@ -17,13 +26,9 @@ export default function SetHabito() {
       </InputContainer>
 
       <ButtonContainer>
-        <button>D</button>
-        <button>S</button>
-        <button>T</button>
-        <button>Q</button>
-        <button>Q</button>
-        <button>S</button>
-        <button>S</button>
+       
+        {diaSemana.map((dia)=> <DiaSemana key={dia.id} dia={dia} days={days} setDays={setDays}/>)}
+      
       </ButtonContainer>
 
       <ConfirmContainer>
@@ -68,20 +73,7 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   margin-top: 10px;
-  button {
-    width: 30px;
-    height: 30px;
-    background: #ffffff;
-    border: 1px solid #d5d5d5;
-    border-radius: 5px;
-    font-family: "Lexend Deca";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 25px;
-    color: #dbdbdb;
-    margin-right: 5px;
-  }
+ 
 `;
 
 const ConfirmContainer = styled.div`
