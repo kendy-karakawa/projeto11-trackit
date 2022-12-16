@@ -1,45 +1,99 @@
-import { useState } from "react";
+import axios from "axios";
+import { useContext, useState } from "react";
 import styled from "styled-components";
+import { BASE_URL } from "../constants/urls";
+import { AuthContext } from "../contexts/auth";
 import DiaSemana from "./DiaSemana";
+import { ThreeDots } from "react-loader-spinner";
 
-export default function SetHabito() {
-  const [nome, setNome] = useState("");
-  const [days, setDays ] = useState([])
-  const diaSemana = [{id:1, name:'S'},{id:2, name:'T'},{id:3, name:'Q'},{id:4, name:'Q'},{id:5, name:'S'},{id:6, name:'S'},{id:7, name:'D'}]
+export default function SetHabito({ setCadastrar }) {
+  const [name, setName] = useState("");
+  const [days, setDays] = useState([]);
+  const diaSemana = [
+    { id: 1, name: "S" },
+    { id: 2, name: "T" },
+    { id: 3, name: "Q" },
+    { id: 4, name: "Q" },
+    { id: 5, name: "S" },
+    { id: 6, name: "S" },
+    { id: 7, name: "D" },
+  ];
+  const { dadosUsuario } = useContext(AuthContext);
+  const [disable, setDisable] = useState(false);
 
-  console.log(days)
+  function salvar(event) {
+    event.preventDefault();
+    setDisable(true);
+    const habito = { name, days };
+    const config = {
+      headers: { Authorization: `Bearer ${dadosUsuario.token}` },
+    };
+    const promise = axios.post(`${BASE_URL}/habits`, habito, config);
+    promise.then(sucesso);
+    promise.catch(falha);
+  }
 
-  // function selectDays(value){
-  //   setDays([...days, value])
-  // }
+  function sucesso(res) {
+    console.log(res.data);
+    setName("");
+    setDays([]);
+    setCadastrar(false);
+    setDisable(false);
+  }
+
+  function falha(erro) {
+    alert(erro.message);
+    setDisable(false);
+  }
+
+  function cancelar(){
+    
+  }
 
   return (
-    <Container>
-      <InputContainer>
+    <Container onSubmit={salvar}>
+      <InputContainer >
         <input
           type="text"
           placeholder="Nome do hábito"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           required
+          disabled={disable}
         />
       </InputContainer>
 
       <ButtonContainer>
-       
-        {diaSemana.map((dia)=> <DiaSemana key={dia.id} dia={dia} days={days} setDays={setDays}/>)}
-      
+        {diaSemana.map((dia) => (
+          <DiaSemana
+          
+            key={dia.id}
+            dia={dia}
+            days={days}
+            setDays={setDays}
+            disabled={disable}
+          />
+        ))}
       </ButtonContainer>
 
       <ConfirmContainer>
-        <p>Cancelar</p>
-        <button>Salvar</button>
+        <p onClick={()=> setCadastrar(false)}>Cancelar</p>
+        <button  type="submit" disabled={disable}>
+          {disable == true ? (
+            <ThreeDots height="40" width="40" color="#ffffff" />
+          ) : (
+            "Salvar"
+          )}
+        </button>
       </ConfirmContainer>
     </Container>
   );
 }
 
-const Container = styled.div`
+
+
+
+const Container = styled.form`
   width: 360px;
   height: 180px;
   background: #ffffff;
@@ -63,8 +117,8 @@ const InputContainer = styled.div`
     font-size: 20px;
     line-height: 25px;
     color: #666666;
-    &::placeholder{
-        color: #DBDBDB
+    &::placeholder {
+      color: #dbdbdb;
     }
   }
 `;
@@ -73,7 +127,6 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   margin-top: 10px;
- 
 `;
 
 const ConfirmContainer = styled.div`
@@ -89,6 +142,7 @@ const ConfirmContainer = styled.div`
     text-align: center;
     color: #52b6ff;
     margin-right: 25px;
+    margin-top: 5px;
   }
   button {
     width: 84px;
@@ -102,5 +156,8 @@ const ConfirmContainer = styled.div`
     line-height: 20px;
     text-align: center;
     color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;

@@ -28,7 +28,6 @@ export default function LoginPag() {
   }
 
   function resposta(res) {
-    //alert("logado com sucesso"); // remover isso depois  ****************** LEMBRETE*************
     setDadosUsuario(res.data)
     navigate("/hoje");
     setLoarding(false);

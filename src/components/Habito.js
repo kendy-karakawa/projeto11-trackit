@@ -1,20 +1,20 @@
 import styled from "styled-components";
 
-export default function Habito() {
+export default function Habito({ id, name, days, deletar }) {
   return (
     <Container>
       <Title>
-        <p>Ler 1 capítulo de livro</p>
-        <ion-icon name="trash-outline"></ion-icon>
+        <p>{name}</p>
+        <ion-icon onClick={() => deletar(id)} name="trash-outline"></ion-icon>
       </Title>
       <ButtonContainer>
-        <button>D</button>
-        <button>S</button>
-        <button>T</button>
-        <button>Q</button>
-        <button>Q</button>
-        <button>S</button>
-        <button>S</button>
+        <button disabled={days.includes(1) && true}>D</button>
+        <button disabled={days.includes(2) && true}>S</button>
+        <button disabled={days.includes(3) && true}>T</button>
+        <button disabled={days.includes(4) && true}>Q</button>
+        <button disabled={days.includes(5) && true}>Q</button>
+        <button disabled={days.includes(6) && true}>S</button>
+        <button disabled={days.includes(7) && true}>S</button>
       </ButtonContainer>
     </Container>
   );
@@ -63,6 +63,20 @@ const ButtonContainer = styled.div`
     font-size: 19.976px;
     line-height: 25px;
     color: #dbdbdb;
+    margin-right: 5px;
+  }
+  button:disabled {
+    width: 30px;
+    height: 30px;
+    background: #cfcfcf;
+    border: 1px solid #cfcfcf;
+    border-radius: 5px;
+    font-family: "Lexend Deca";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19.976px;
+    line-height: 25px;
+    color: #ffffff;
     margin-right: 5px;
   }
 `;

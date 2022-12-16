@@ -9,7 +9,7 @@ export default function DiaSemana({ dia, days, setDays }) {
   const name = dia.name;
   const [cor, setCor] = useState(UNSELECT);
 
-  function clicou() {
+  function selecionarDiaSemana() {
     if (!days.includes(id)) {
       setDays([...days, id]);
       setCor(SELECT);
@@ -20,9 +20,10 @@ export default function DiaSemana({ dia, days, setDays }) {
     }
   }
 
+  
   return (
     <>
-      <Button onClick={clicou} cor={cor}>
+      <Button type="button" onClick={selecionarDiaSemana} cor={cor}>
         {name}
       </Button>
     </>
