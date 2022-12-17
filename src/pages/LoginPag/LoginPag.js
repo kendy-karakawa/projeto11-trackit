@@ -29,6 +29,7 @@ export default function LoginPag() {
 
   function resposta(res) {
     setDadosUsuario(res.data)
+    console.log(res.data)
     navigate("/hoje");
     setLoarding(false);
     setDisable(false);

@@ -12,19 +12,58 @@ import dayjs from "dayjs";
 
 
 export default function HojePag(){
-  const { dadosUsuario } = useContext(AuthContext)
+  const { dadosUsuario, concluidos, setConcluidos, porcentagem, setPorcentagem} = useContext(AuthContext)
   const [habitosHoje, setHabitosHoje] = useState(undefined)
-
+  const [totalHabitosDia, setTotalHabitosDia] = useState(0)
+  const [subtitulo, setSubtitulo] = useState("Nenhum hábito concluído ainda")
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzIxMiwiaWF0IjoxNjcxMjg0OTgwfQ.Zu7BjycIieoYs5Z5XW9WG4vDa1IMSr4aZFqoWrMF-8c"
+  
   useEffect(()=>{
     const config = {
-      headers: { Authorization: `Bearer ${dadosUsuario.token}` },
+      headers: { Authorization: `Bearer ${token}` }, // dadosUsuario.token
     };
     const request = axios.get(`${BASE_URL}habits/today`, config)
-    request.then((res)=> {setHabitosHoje(res.data)})
+    request.then(resposta)
     request.catch((erro)=> console.log(erro.message))
-
-
   },[])
+
+  function resposta(res){
+    const lista = res.data
+    const listaConcluidos = []
+    setHabitosHoje(res.data)
+    console.log(res.data)
+    setTotalHabitosDia(lista.length)
+
+    for (let i=0; i<lista.length; i++){
+      if(lista[i].done == true){
+        listaConcluidos.push(lista[i].id)
+      }
+    }
+    setConcluidos(listaConcluidos)
+    setPorcentagem()
+  }
+
+  function marcarHabito(id){
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }, // dadosUsuario.token
+    };
+    const send = axios
+    .post(`${BASE_URL}/habits/${id}/check`,{}, config)
+    .then((res) => console.log(res.status))
+    .catch((erro) => console.log(erro.message))
+  }
+
+  function desmarcarHabito(id){
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }, // dadosUsuario.token
+    };
+    const send = axios
+    .post(`${BASE_URL}/habits/${id}/uncheck`,{}, config)
+    .then((res) => console.log(res.status))
+    .catch((erro) => console.log(erro.message))
+  }
+
+  
 
     return (
         <>
@@ -32,7 +71,7 @@ export default function HojePag(){
         <ScreenContainer>
           <Title>
             <p>Segunda, 17/05 </p>
-            <h1>Nenhum hábito concluído ainda  </h1>
+            <h1> {concluidos.length/totalHabitosDia == 0 ? subtitulo: `${Math.round((concluidos.length/totalHabitosDia)*100)}% dos hábitos concluídos` } </h1>
             
           </Title>
           {habitosHoje !== undefined && habitosHoje.map((h)=> (<HabitoDia 
@@ -42,6 +81,8 @@ export default function HojePag(){
           done={h.done}
           currentSequence={h.currentSequence}
           highestSequence={h.highestSequence}
+          marcarHabito={marcarHabito}
+          desmarcarHabito={desmarcarHabito}
           
           
           

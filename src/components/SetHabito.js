@@ -34,7 +34,6 @@ export default function SetHabito({ setCadastrar }) {
   }
 
   function sucesso(res) {
-    console.log(res.data);
     setName("");
     setDays([]);
     setCadastrar(false);

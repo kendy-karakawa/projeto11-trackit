@@ -1,6 +1,33 @@
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import { AuthContext } from "../contexts/auth";
+import Vector from "../styles/img/Vector.png";
 
-export default function HabitoDia({id, name, done, currentSequence, highestSequence}) {
+const CHECK = { back: "#8FC549", border: "#8FC549" };
+const UNCHECK = { back: "#EBEBEB", border: "#E7E7E7" };
+
+export default function HabitoDia({
+  id,
+  name,
+  done,
+  currentSequence,
+  highestSequence,
+  marcarHabito,
+  desmarcarHabito,
+}) {
+  const { concluidos, setConcluidos, } = useContext(AuthContext);
+
+  function concluiuHabito() {
+    if (!concluidos.includes(id)) {
+      setConcluidos([...concluidos, id]);
+      marcarHabito(id);
+    } else {
+      const newList = concluidos.filter((i) => i !== id);
+      setConcluidos(newList);
+      desmarcarHabito(id);
+    }
+  }
+
   return (
     <Container>
       <LeftContainer>
@@ -9,9 +36,17 @@ export default function HabitoDia({id, name, done, currentSequence, highestSeque
         <h2> Seu recorde: {highestSequence} dias</h2>
       </LeftContainer>
 
-      <RigthContainer>
-      <ion-icon name="checkbox"></ion-icon>
-      </RigthContainer>
+      <div>
+        {!concluidos.includes(id) ? (
+          <Button buttonColor={UNCHECK} onClick={concluiuHabito}>
+            <img src={Vector} alt="vector" />
+          </Button>
+        ) : (
+          <Button buttonColor={CHECK} onClick={concluiuHabito}>
+            <img src={Vector} alt="vector" />
+          </Button>
+        )}
+      </div>
     </Container>
   );
 }
@@ -23,9 +58,9 @@ const Container = styled.div`
   border-radius: 5px;
   padding: 15px 15px 15px 15px;
   margin-top: 10px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const LeftContainer = styled.div`
@@ -54,11 +89,13 @@ const LeftContainer = styled.div`
   }
 `;
 
-const RigthContainer = styled.div`
-  ion-icon {
-    width: 80px;
-    height: 80px;
-    color: #ebebeb;
-    
-  }
+const Button = styled.div`
+  width: 80px;
+  height: 80px;
+  background-color: ${(props)=> props.buttonColor.back};
+  border: 1px solid ${(props)=> props.buttonColor.border};
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
