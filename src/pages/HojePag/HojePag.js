@@ -1,5 +1,5 @@
 import Header from "../../components/Header";
-import { ScreenContainer, Title, } from "./style";
+import { ScreenContainer, Title, Subtitle } from "./style";
 import Menu from "../../components/Menu";
 import HabitoDia from "../../components/HabitoDia";
 import { useContext, useEffect, useState } from "react";
@@ -15,7 +15,6 @@ export default function HojePag(){
   const { dadosUsuario, concluidos, setConcluidos, porcentagem, setPorcentagem} = useContext(AuthContext)
   const [habitosHoje, setHabitosHoje] = useState(undefined)
   const [totalHabitosDia, setTotalHabitosDia] = useState(0)
-  const [subtitulo, setSubtitulo] = useState("Nenhum hábito concluído ainda")
   const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzIxMiwiaWF0IjoxNjcxMjg0OTgwfQ.Zu7BjycIieoYs5Z5XW9WG4vDa1IMSr4aZFqoWrMF-8c"
   
   useEffect(()=>{
@@ -50,7 +49,7 @@ export default function HojePag(){
     };
     const send = axios
     .post(`${BASE_URL}/habits/${id}/check`,{}, config)
-    .then((res) => console.log(res.status))
+    //.then((res) => console.log(res.status))
     .catch((erro) => console.log(erro.message))
   }
 
@@ -60,7 +59,7 @@ export default function HojePag(){
     };
     const send = axios
     .post(`${BASE_URL}/habits/${id}/uncheck`,{}, config)
-    .then((res) => console.log(res.status))
+    //.then((res) => console.log(res.status))
     .catch((erro) => console.log(erro.message))
   }
 
@@ -72,7 +71,11 @@ export default function HojePag(){
         <ScreenContainer>
           <Title>
             <p>Segunda, 17/05 </p>
-            <h1> {concluidos.length/totalHabitosDia == 0 ? subtitulo: `${porcentagem}% dos hábitos concluídos` } </h1>
+            {concluidos.length/totalHabitosDia == 0 ? 
+            <Subtitle textColor={"#BABABA"}> Nenhum hábito concluído ainda </Subtitle> :
+            <Subtitle textColor={"#8FC549"}> {porcentagem}% dos hábitos concluídos</Subtitle>
+            
+            }
             
           </Title>
           {habitosHoje !== undefined && habitosHoje.map((h)=> (<HabitoDia 

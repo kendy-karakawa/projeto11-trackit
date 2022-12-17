@@ -34,16 +34,6 @@ export default function HabitoDia({
     setConcluidos(listaConcluido)
     setPorcentagem(Math.round((listaConcluido.length/totalHabitosDia)*100))
 
-    // if (!concluidos.includes(id)) {
-    //   setConcluidos([...concluidos, id]);
-    //   marcarHabito(id);
-    // } else {
-    //   const newList = concluidos.filter((i) => i !== id);
-    //   setConcluidos(newList);
-    //   desmarcarHabito(id);
-    // }
-
-    
   }
 
   

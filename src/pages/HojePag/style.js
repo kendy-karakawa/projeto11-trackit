@@ -27,12 +27,13 @@ export const Title = styled.div`
     line-height: 29px;
     color: #126ba5;
   }
-  h1 {
-    font-family: "Lexend Deca";
+`;
+
+export const Subtitle = styled.h2`
+  font-family: "Lexend Deca";
     font-style: normal;
     font-weight: 400;
     font-size: 17.976px;
     line-height: 22px;
-    color: #bababa;
-  }
-`;
+    color: ${(props) => props.textColor};
+`
