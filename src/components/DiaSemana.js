@@ -23,7 +23,7 @@ export default function DiaSemana({ dia, days, setDays }) {
   
   return (
     <>
-      <Button type="button" onClick={selecionarDiaSemana} cor={cor}>
+      <Button type="button" onClick={selecionarDiaSemana} cor={cor} data-test="habit-day">
         {name}
       </Button>
     </>

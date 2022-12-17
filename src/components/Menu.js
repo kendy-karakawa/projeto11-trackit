@@ -8,13 +8,13 @@ import { AuthContext } from "../contexts/auth";
 export default function Menu() {
   const {porcentagem} = useContext(AuthContext)
   return (
-    <MenuContainer>
-      <Link to="/habitos">
+    <MenuContainer data-test="menu">
+      <Link to="/habitos" data-test="habit-link">
         <p>Hábitos</p>
       </Link>
       
         <div >
-        <Link to="/hoje">
+        <Link to="/hoje" data-test="today">
           <CircularProgressbar
             value={porcentagem}
             text="Hoje"
@@ -30,7 +30,7 @@ export default function Menu() {
           </Link>
         </div>
       
-      <Link to="/historicos">
+      <Link to="/historicos" data-test="history-link">
         <p>Histórico</p>
       </Link>
     </MenuContainer>

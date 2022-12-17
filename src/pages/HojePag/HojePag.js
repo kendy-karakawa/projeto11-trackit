@@ -7,6 +7,7 @@ import { AuthContext } from "../../contexts/auth";
 import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 import dayjs from "dayjs";
+import 'dayjs/locale/pt-br';
 
 
 
@@ -15,16 +16,25 @@ export default function HojePag(){
   const { dadosUsuario, concluidos, setConcluidos, porcentagem, setPorcentagem} = useContext(AuthContext)
   const [habitosHoje, setHabitosHoje] = useState(undefined)
   const [totalHabitosDia, setTotalHabitosDia] = useState(0)
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzIxMiwiaWF0IjoxNjcxMjg0OTgwfQ.Zu7BjycIieoYs5Z5XW9WG4vDa1IMSr4aZFqoWrMF-8c"
+  const key = localStorage.getItem("key")
+  const config = {
+    headers: { Authorization: `Bearer ${key || dadosUsuario.token}` },
+  };
+  
+  require('dayjs/locale/pt-br');
+  const dayjs = require('dayjs');
+  const data = dayjs().locale("pt-br").format("dddd DD/MM");
+
+  
+
+  const [refresh, setRefresh] = useState(true)
   
   useEffect(()=>{
-    const config = {
-      headers: { Authorization: `Bearer ${token}` }, // dadosUsuario.token
-    };
     const request = axios.get(`${BASE_URL}habits/today`, config)
     request.then(resposta)
     request.catch((erro)=> console.log(erro.message))
-  },[])
+    setRefresh(true)
+  },[refresh])
 
   function resposta(res){
     const lista = res.data
@@ -44,22 +54,16 @@ export default function HojePag(){
   
 
   function marcarHabito(id){
-    const config = {
-      headers: { Authorization: `Bearer ${token}` }, // dadosUsuario.token
-    };
     const send = axios
     .post(`${BASE_URL}/habits/${id}/check`,{}, config)
-    .then((res) => console.log(res.status))
+    .then((res) => (setRefresh(false)))
     .catch((erro) => console.log(erro.message))
   }
 
   function desmarcarHabito(id){
-    const config = {
-      headers: { Authorization: `Bearer ${token}` }, // dadosUsuario.token
-    };
     const send = axios
     .post(`${BASE_URL}/habits/${id}/uncheck`,{}, config)
-    .then((res) => console.log(res.status))
+    .then((res) => (setRefresh(false)))
     .catch((erro) => console.log(erro.message))
   }
 
@@ -70,10 +74,10 @@ export default function HojePag(){
         <Header />
         <ScreenContainer>
           <Title>
-            <p>Segunda, 17/05 </p>
+            <p data-test="today">{data}</p>
             {concluidos.length/totalHabitosDia == 0 ? 
-            <Subtitle textColor={"#BABABA"}> Nenhum hábito concluído ainda </Subtitle> :
-            <Subtitle textColor={"#8FC549"}> {porcentagem}% dos hábitos concluídos</Subtitle>
+            <Subtitle textColor={"#BABABA"} data-test="today-counter"> Nenhum hábito concluído ainda </Subtitle> :
+            <Subtitle textColor={"#8FC549"} data-test="today-counter"> {porcentagem}% dos hábitos concluídos</Subtitle>
             
             }
             
@@ -88,6 +92,7 @@ export default function HojePag(){
           marcarHabito={marcarHabito}
           desmarcarHabito={desmarcarHabito}
           totalHabitosDia={totalHabitosDia}
+         
           
           
           

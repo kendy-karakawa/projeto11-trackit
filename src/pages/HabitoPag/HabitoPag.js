@@ -12,12 +12,13 @@ export default function HabitoPag() {
   const [listaHabitos, setListaHabitos] = useState(undefined);
   const [cadastrar, setCadastrar] = useState(false);
   const { dadosUsuario } = useContext(AuthContext);
-  //const [comment, setComment] = useState(false)
+  const key = localStorage.getItem("key")
+  const config = {
+    headers: { Authorization: `Bearer ${key || dadosUsuario.token}` },
+  };
 
   useEffect(() => {
-    const config = {
-      headers: { Authorization: `Bearer ${dadosUsuario.token}` },
-    };
+    
     const request = axios.get(`${BASE_URL}/habits`, config);
     request.then((res) => {
       setListaHabitos(res.data);
@@ -27,9 +28,6 @@ export default function HabitoPag() {
 
   function deletar(elemente) {
     if (window.confirm("Deseja deletar este hábito ?")) {
-      const config = {
-        headers: { Authorization: `Bearer ${dadosUsuario.token}` },
-      };
       const request = axios.delete(`${BASE_URL}/habits/${elemente}`, config);
       request.then(() => console.log("deletado"));
     }
@@ -41,7 +39,7 @@ export default function HabitoPag() {
       <ScreenContainer>
         <Title>
           <p>Meus hábitos</p>
-          <button onClick={() => setCadastrar(true)}> + </button>
+          <button onClick={() => setCadastrar(true)} data-test="habit-create-btn"> + </button>
         </Title>
         {cadastrar === true && <SetHabito setCadastrar={setCadastrar} />}
 

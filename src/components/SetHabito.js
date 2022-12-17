@@ -20,14 +20,15 @@ export default function SetHabito({ setCadastrar }) {
   ];
   const { dadosUsuario } = useContext(AuthContext);
   const [disable, setDisable] = useState(false);
+  const key = localStorage.getItem("key")
+  const config = {
+    headers: { Authorization: `Bearer ${key || dadosUsuario.token}` },
+  };
 
   function salvar(event) {
     event.preventDefault();
     setDisable(true);
     const habito = { name, days };
-    const config = {
-      headers: { Authorization: `Bearer ${dadosUsuario.token}` },
-    };
     const promise = axios.post(`${BASE_URL}/habits`, habito, config);
     promise.then(sucesso);
     promise.catch(falha);
@@ -50,7 +51,7 @@ export default function SetHabito({ setCadastrar }) {
   }
 
   return (
-    <Container onSubmit={salvar}>
+    <Container onSubmit={salvar} data-test="habit-create-container">
       <InputContainer >
         <input
           type="text"
@@ -59,6 +60,7 @@ export default function SetHabito({ setCadastrar }) {
           onChange={(e) => setName(e.target.value)}
           required
           disabled={disable}
+          data-test="habit-name-input"
         />
       </InputContainer>
 
@@ -76,8 +78,8 @@ export default function SetHabito({ setCadastrar }) {
       </ButtonContainer>
 
       <ConfirmContainer>
-        <p onClick={()=> setCadastrar(false)}>Cancelar</p>
-        <button  type="submit" disabled={disable}>
+        <p onClick={()=> setCadastrar(false)} data-test="habit-create-cancel-btn">Cancelar</p>
+        <button  type="submit" disabled={disable} data-test="habit-create-save-btn">
           {disable == true ? (
             <ThreeDots height="40" width="40" color="#ffffff" />
           ) : (

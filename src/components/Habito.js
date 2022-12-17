@@ -2,19 +2,19 @@ import styled from "styled-components";
 
 export default function Habito({ id, name, days, deletar }) {
   return (
-    <Container>
+    <Container data-test="habit-container">
       <Title>
-        <p>{name}</p>
-        <ion-icon onClick={() => deletar(id)} name="trash-outline"></ion-icon>
+        <p data-test="habit-name">{name}</p>
+        <ion-icon onClick={() => deletar(id)} name="trash-outline" data-test="habit-delete-btn"></ion-icon>
       </Title>
       <ButtonContainer>
-        <button disabled={days.includes(1) && true}>D</button>
-        <button disabled={days.includes(2) && true}>S</button>
-        <button disabled={days.includes(3) && true}>T</button>
-        <button disabled={days.includes(4) && true}>Q</button>
-        <button disabled={days.includes(5) && true}>Q</button>
-        <button disabled={days.includes(6) && true}>S</button>
-        <button disabled={days.includes(7) && true}>S</button>
+        <button data-test="habit-day" disabled={days.includes(1) && true}>D</button>
+        <button data-test="habit-day" disabled={days.includes(2) && true}>S</button>
+        <button data-test="habit-day" disabled={days.includes(3) && true}>T</button>
+        <button data-test="habit-day" disabled={days.includes(4) && true}>Q</button>
+        <button data-test="habit-day" disabled={days.includes(5) && true}>Q</button>
+        <button data-test="habit-day" disabled={days.includes(6) && true}>S</button>
+        <button data-test="habit-day" disabled={days.includes(7) && true}>S</button>
       </ButtonContainer>
     </Container>
   );

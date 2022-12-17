@@ -15,12 +15,13 @@ export default function HabitoDia({
   marcarHabito,
   desmarcarHabito,
   totalHabitosDia,
+  
 }) {
   const { concluidos, setConcluidos, setPorcentagem } = useContext(AuthContext);
   const [ corSequencia, setCorSequencia] = useState(done == false ? false : true)
   const [ corRecorede, setCorRecorde] = useState(done == true && currentSequence == highestSequence ? true : false)
 
-
+ 
   function concluiuHabito() {
     let listaConcluido = [...concluidos];
     if (!listaConcluido.includes(id)) {
@@ -42,19 +43,20 @@ export default function HabitoDia({
       setCorRecorde(false)
     }
 
+    
     setConcluidos(listaConcluido);
     setPorcentagem(Math.round((listaConcluido.length / totalHabitosDia) * 100));
   }
 
   return (
-    <Container>
+    <Container data-test="today-habit-container">
       <LeftContainer>
-        <h1>{name}</h1>
-        <h2>Sequência atual: {
+        <h1 data-test="today-habit-name">{name}</h1>
+        <h2 data-test="today-habit-sequence">Sequência atual: {
            corSequencia == false ?
           <Sequencia cor={'#666666'}> {currentSequence} dias</Sequencia> :
           <Sequencia cor={'#8FC549'}> {currentSequence} dias</Sequencia>} </h2>
-        <h2> Seu recorde: {
+        <h2 data-test="today-habit-record"> Seu recorde: {
            corRecorede == false ?
           <Record cor={'#666666'}> {highestSequence} dias</Record> : 
           <Record cor={'#8FC549'}> {highestSequence} dias</Record>} </h2>
@@ -62,11 +64,11 @@ export default function HabitoDia({
 
       <div>
         {!concluidos.includes(id) ? (
-          <Button buttonColor={UNCHECK} onClick={concluiuHabito}>
+          <Button buttonColor={UNCHECK} onClick={concluiuHabito} data-test="today-habit-check-btn">
             <img src={Vector} alt="vector" />
           </Button>
         ) : (
-          <Button buttonColor={CHECK} onClick={concluiuHabito}>
+          <Button buttonColor={CHECK} onClick={concluiuHabito} data-test="today-habit-check-btn">
             <img src={Vector} alt="vector" />
           </Button>
         )}

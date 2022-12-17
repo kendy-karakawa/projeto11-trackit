@@ -33,6 +33,10 @@ export default function LoginPag() {
     navigate("/hoje");
     setLoarding(false);
     setDisable(false);
+    const token = res.data.token
+    const img = res.data.image
+    localStorage.setItem("key", token )
+    localStorage.setItem("img", img)
   }
 
   function erro(err) {
@@ -53,6 +57,7 @@ export default function LoginPag() {
           onChange={(e) => setEmail(e.target.value)}
           required
           disabled={disable}
+          data-test="email-input" 
         />
         <input
           type="password"
@@ -61,8 +66,9 @@ export default function LoginPag() {
           onChange={(e) => setPassword(e.target.value)}
           required
           disabled={disable}
+          data-test="password-input"
         />
-        <button type="submit">
+        <button type="submit" data-test="login-btn">
           {loarding == true ? (
             <ThreeDots height="40" width="40" color="#ffffff" />
           ) : (
@@ -70,7 +76,7 @@ export default function LoginPag() {
           )}
         </button>
       </Form>
-      <Link to="/cadastro">
+      <Link to="/cadastro" data-test="signup-link">
         <p>Não tem uma conta? Cadastre-se!</p>
       </Link>
     </ScreenContainer>

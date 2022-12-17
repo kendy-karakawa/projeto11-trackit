@@ -50,6 +50,7 @@ export default function CadastroPag() {
           onChange={(e) => setEmail(e.target.value)}
           required
           disabled={disable}
+          data-test="email-input"
         />
         <input
           type="password"
@@ -58,6 +59,7 @@ export default function CadastroPag() {
           onChange={(e) => setPassword(e.target.value)}
           required
           disabled={disable}
+          data-test="password-input"
         />
         <input
           type="name"
@@ -66,6 +68,7 @@ export default function CadastroPag() {
           onChange={(e) => setName(e.target.value)}
           required
           disabled={disable}
+          data-test="user-name-input" 
         />
         <input
           type="url"
@@ -74,8 +77,9 @@ export default function CadastroPag() {
           onChange={(e) => setImage(e.target.value)}
           required
           disabled={disable}
+          data-test="user-image-input" 
         />
-        <button type="submit" disabled={disable}>
+        <button type="submit" disabled={disable} data-test="signup-btn" >
           {loarding == true ? (
             <ThreeDots height="40" width="40" color="#ffffff" />
           ) : (
@@ -83,7 +87,7 @@ export default function CadastroPag() {
           )}
         </button>
       </Form>
-      <Link to="/">
+      <Link to="/" data-test="login-link">
         <p>Já tem uma conta? Faça login!</p>
       </Link>
     </ScreenContainer>

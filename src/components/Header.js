@@ -6,11 +6,12 @@ import { AuthContext } from "../contexts/auth";
 
 export default function Header() {
   const {dadosUsuario} = useContext(AuthContext)
+  const img = localStorage.getItem("img")
 
   return (
-    <HeaderContainer>
+    <HeaderContainer data-test="header">
       <img src={Logo2} alt="logo" />
-      <Foto src={dadosUsuario.image} alt="Foto" />
+      <Foto src={img || dadosUsuario.image} alt="Foto" />
     </HeaderContainer>
   );
 }
