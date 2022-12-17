@@ -40,8 +40,9 @@ export default function HojePag(){
       }
     }
     setConcluidos(listaConcluidos)
-    setPorcentagem()
+    setPorcentagem(Math.round((listaConcluidos.length/lista.length)*100))
   }
+  
 
   function marcarHabito(id){
     const config = {
@@ -63,7 +64,7 @@ export default function HojePag(){
     .catch((erro) => console.log(erro.message))
   }
 
-  
+  //Math.round((concluidos.length/totalHabitosDia)*100)
 
     return (
         <>
@@ -71,7 +72,7 @@ export default function HojePag(){
         <ScreenContainer>
           <Title>
             <p>Segunda, 17/05 </p>
-            <h1> {concluidos.length/totalHabitosDia == 0 ? subtitulo: `${Math.round((concluidos.length/totalHabitosDia)*100)}% dos hábitos concluídos` } </h1>
+            <h1> {concluidos.length/totalHabitosDia == 0 ? subtitulo: `${porcentagem}% dos hábitos concluídos` } </h1>
             
           </Title>
           {habitosHoje !== undefined && habitosHoje.map((h)=> (<HabitoDia 
@@ -83,6 +84,7 @@ export default function HojePag(){
           highestSequence={h.highestSequence}
           marcarHabito={marcarHabito}
           desmarcarHabito={desmarcarHabito}
+          totalHabitosDia={totalHabitosDia}
           
           
           

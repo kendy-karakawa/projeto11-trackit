@@ -14,19 +14,39 @@ export default function HabitoDia({
   highestSequence,
   marcarHabito,
   desmarcarHabito,
+  totalHabitosDia
 }) {
-  const { concluidos, setConcluidos, } = useContext(AuthContext);
+  const { concluidos, setConcluidos, setPorcentagem} = useContext(AuthContext);
+
+
 
   function concluiuHabito() {
-    if (!concluidos.includes(id)) {
-      setConcluidos([...concluidos, id]);
+    let listaConcluido = [...concluidos]
+    if(!listaConcluido.includes(id)){
+      listaConcluido = [...concluidos, id]
       marcarHabito(id);
-    } else {
-      const newList = concluidos.filter((i) => i !== id);
-      setConcluidos(newList);
-      desmarcarHabito(id);
+    } else{
+      const newList = listaConcluido.filter((i) => i !== id);
+      listaConcluido = newList
+      desmarcarHabito(id)
     }
+
+    setConcluidos(listaConcluido)
+    setPorcentagem(Math.round((listaConcluido.length/totalHabitosDia)*100))
+
+    // if (!concluidos.includes(id)) {
+    //   setConcluidos([...concluidos, id]);
+    //   marcarHabito(id);
+    // } else {
+    //   const newList = concluidos.filter((i) => i !== id);
+    //   setConcluidos(newList);
+    //   desmarcarHabito(id);
+    // }
+
+    
   }
+
+  
 
   return (
     <Container>
