@@ -14,36 +14,50 @@ export default function HabitoDia({
   highestSequence,
   marcarHabito,
   desmarcarHabito,
-  totalHabitosDia
+  totalHabitosDia,
 }) {
-  const { concluidos, setConcluidos, setPorcentagem} = useContext(AuthContext);
-
+  const { concluidos, setConcluidos, setPorcentagem } = useContext(AuthContext);
+  const [ corSequencia, setCorSequencia] = useState(done == false ? false : true)
+  const [ corRecorede, setCorRecorde] = useState(done == true && currentSequence == highestSequence ? true : false)
 
 
   function concluiuHabito() {
-    let listaConcluido = [...concluidos]
-    if(!listaConcluido.includes(id)){
-      listaConcluido = [...concluidos, id]
+    let listaConcluido = [...concluidos];
+    if (!listaConcluido.includes(id)) {
+      listaConcluido = [...concluidos, id];
       marcarHabito(id);
-    } else{
+      setCorSequencia(true)
+
+      if(currentSequence == highestSequence){
+        setCorRecorde(true)
+      } else {
+        setCorRecorde(false)
+      }
+
+    } else {
       const newList = listaConcluido.filter((i) => i !== id);
-      listaConcluido = newList
-      desmarcarHabito(id)
+      listaConcluido = newList;
+      desmarcarHabito(id);
+      setCorSequencia(false)
+      setCorRecorde(false)
     }
 
-    setConcluidos(listaConcluido)
-    setPorcentagem(Math.round((listaConcluido.length/totalHabitosDia)*100))
-
+    setConcluidos(listaConcluido);
+    setPorcentagem(Math.round((listaConcluido.length / totalHabitosDia) * 100));
   }
-
-  
 
   return (
     <Container>
       <LeftContainer>
         <h1>{name}</h1>
-        <h2>Sequência atual: {currentSequence} dias</h2>
-        <h2> Seu recorde: {highestSequence} dias</h2>
+        <h2>Sequência atual: {
+           corSequencia == false ?
+          <Sequencia cor={'#666666'}> {currentSequence} dias</Sequencia> :
+          <Sequencia cor={'#8FC549'}> {currentSequence} dias</Sequencia>} </h2>
+        <h2> Seu recorde: {
+           corRecorede == false ?
+          <Record cor={'#666666'}> {highestSequence} dias</Record> : 
+          <Record cor={'#8FC549'}> {highestSequence} dias</Record>} </h2>
       </LeftContainer>
 
       <div>
@@ -78,7 +92,6 @@ const LeftContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin-bottom: 10px;
-
   h1 {
     font-family: "Lexend Deca";
     font-style: normal;
@@ -94,16 +107,34 @@ const LeftContainer = styled.div`
     font-weight: 400;
     font-size: 13px;
     line-height: 16px;
-
     color: #666666;
   }
+ 
+`;
+
+const Sequencia = styled.span`
+  font-family: "Lexend Deca";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: ${(props) => props.cor};
+`;
+
+const Record = styled.span`
+  font-family: "Lexend Deca";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: ${(props) => props.cor};
 `;
 
 const Button = styled.div`
   width: 80px;
   height: 80px;
-  background-color: ${(props)=> props.buttonColor.back};
-  border: 1px solid ${(props)=> props.buttonColor.border};
+  background-color: ${(props) => props.buttonColor.back};
+  border: 1px solid ${(props) => props.buttonColor.border};
   border-radius: 5px;
   display: flex;
   justify-content: center;

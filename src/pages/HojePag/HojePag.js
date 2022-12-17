@@ -49,7 +49,7 @@ export default function HojePag(){
     };
     const send = axios
     .post(`${BASE_URL}/habits/${id}/check`,{}, config)
-    //.then((res) => console.log(res.status))
+    .then((res) => console.log(res.status))
     .catch((erro) => console.log(erro.message))
   }
 
@@ -59,7 +59,7 @@ export default function HojePag(){
     };
     const send = axios
     .post(`${BASE_URL}/habits/${id}/uncheck`,{}, config)
-    //.then((res) => console.log(res.status))
+    .then((res) => console.log(res.status))
     .catch((erro) => console.log(erro.message))
   }
 
