@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export default function HabitoDia() {
+export default function HabitoDia({id, name, done, currentSequence, highestSequence}) {
   return (
     <Container>
       <LeftContainer>
-        <h1>Ler 1 capítulo de livro</h1>
-        <h2>Sequência atual: 3 dias</h2>
-        <h2> Seu recorde: 5 dias</h2>
+        <h1>{name}</h1>
+        <h2>Sequência atual: {currentSequence} dias</h2>
+        <h2> Seu recorde: {highestSequence} dias</h2>
       </LeftContainer>
 
       <RigthContainer>
