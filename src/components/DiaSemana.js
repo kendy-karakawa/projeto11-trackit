@@ -7,8 +7,9 @@ const UNSELECT = { background: "#FFFFFF", text: "#DBDBDB", border: "#DBDBDB" };
 export default function DiaSemana({ dia, days, setDays }) {
   const id = dia.id;
   const name = dia.name;
-  const [cor, setCor] = useState(UNSELECT);
+  const [cor, setCor] = useState(days.includes(id) ? SELECT :UNSELECT);
 
+  
   function selecionarDiaSemana() {
     if (!days.includes(id)) {
       setDays([...days, id]);

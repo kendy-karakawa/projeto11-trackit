@@ -6,9 +6,10 @@ import { AuthContext } from "../contexts/auth";
 import DiaSemana from "./DiaSemana";
 import { ThreeDots } from "react-loader-spinner";
 
-export default function SetHabito({ setCadastrar }) {
-  const [name, setName] = useState("");
-  const [days, setDays] = useState([]);
+export default function SetHabito({ setCadastrar,name, setName, days, setDays }) {
+  // const [name, setName] = useState("");
+  // const [days, setDays] = useState([]);
+  //name, setName, days, setDays
   const diaSemana = [
     { id: 1, name: "S" },
     { id: 2, name: "T" },
@@ -16,7 +17,7 @@ export default function SetHabito({ setCadastrar }) {
     { id: 4, name: "Q" },
     { id: 5, name: "S" },
     { id: 6, name: "S" },
-    { id: 7, name: "D" },
+    { id: 0, name: "D" },
   ];
   const { dadosUsuario } = useContext(AuthContext);
   const [disable, setDisable] = useState(false);

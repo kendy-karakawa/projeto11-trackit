@@ -40,7 +40,7 @@ export default function HojePag(){
     const lista = res.data
     const listaConcluidos = []
     setHabitosHoje(res.data)
-    console.log(res.data)
+    //console.log(res.data)
     setTotalHabitosDia(lista.length)
 
     for (let i=0; i<lista.length; i++){

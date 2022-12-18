@@ -12,13 +12,14 @@ export default function HabitoPag() {
   const [listaHabitos, setListaHabitos] = useState(undefined);
   const [cadastrar, setCadastrar] = useState(false);
   const { dadosUsuario } = useContext(AuthContext);
-  const key = localStorage.getItem("key")
+  const [name, setName] = useState("");
+  const [days, setDays] = useState([]);
+  const key = localStorage.getItem("key");
   const config = {
     headers: { Authorization: `Bearer ${key || dadosUsuario.token}` },
   };
 
   useEffect(() => {
-    
     const request = axios.get(`${BASE_URL}/habits`, config);
     request.then((res) => {
       setListaHabitos(res.data);
@@ -39,9 +40,23 @@ export default function HabitoPag() {
       <ScreenContainer>
         <Title>
           <p>Meus hábitos</p>
-          <button onClick={() => setCadastrar(true)} data-test="habit-create-btn"> + </button>
+          <button
+            onClick={() => setCadastrar(true)}
+            data-test="habit-create-btn"
+          >
+            {" "}
+            +{" "}
+          </button>
         </Title>
-        {cadastrar === true && <SetHabito setCadastrar={setCadastrar} />}
+        {cadastrar === true && (
+          <SetHabito
+            setCadastrar={setCadastrar}
+            name={name}
+            setName={setName}
+            days={days}
+            setDays={setDays}
+          />
+        )}
 
         {listaHabitos !== undefined &&
           listaHabitos.map((h) => (
