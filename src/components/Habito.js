@@ -8,13 +8,13 @@ export default function Habito({ id, name, days, deletar }) {
         <ion-icon onClick={() => deletar(id)} name="trash-outline" data-test="habit-delete-btn"></ion-icon>
       </Title>
       <ButtonContainer>
-        <button data-test="habit-day" disabled={days.includes(1) && true}>D</button>
-        <button data-test="habit-day" disabled={days.includes(2) && true}>S</button>
-        <button data-test="habit-day" disabled={days.includes(3) && true}>T</button>
+        <button data-test="habit-day" disabled={days.includes(0) && true}>D</button>
+        <button data-test="habit-day" disabled={days.includes(1) && true}>S</button>
+        <button data-test="habit-day" disabled={days.includes(2) && true}>T</button>
+        <button data-test="habit-day" disabled={days.includes(3) && true}>Q</button>
         <button data-test="habit-day" disabled={days.includes(4) && true}>Q</button>
-        <button data-test="habit-day" disabled={days.includes(5) && true}>Q</button>
+        <button data-test="habit-day" disabled={days.includes(5) && true}>S</button>
         <button data-test="habit-day" disabled={days.includes(6) && true}>S</button>
-        <button data-test="habit-day" disabled={days.includes(7) && true}>S</button>
       </ButtonContainer>
     </Container>
   );
