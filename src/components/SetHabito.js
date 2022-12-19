@@ -11,13 +11,13 @@ export default function SetHabito({ setCadastrar,name, setName, days, setDays })
   // const [days, setDays] = useState([]);
   //name, setName, days, setDays
   const diaSemana = [
+    { id: 0, name: "D" },
     { id: 1, name: "S" },
     { id: 2, name: "T" },
     { id: 3, name: "Q" },
     { id: 4, name: "Q" },
     { id: 5, name: "S" },
     { id: 6, name: "S" },
-    { id: 0, name: "D" },
   ];
   const { dadosUsuario } = useContext(AuthContext);
   const [disable, setDisable] = useState(false);
