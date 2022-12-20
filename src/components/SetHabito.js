@@ -79,14 +79,17 @@ export default function SetHabito({ setCadastrar,name, setName, days, setDays })
       </ButtonContainer>
 
       <ConfirmContainer>
-        <p onClick={()=> setCadastrar(false)} data-test="habit-create-cancel-btn">Cancelar</p>
-        <button  type="submit" disabled={disable} data-test="habit-create-save-btn">
+        <Cancelar onClick={()=> setCadastrar(false)} 
+        disabled={disable} 
+        data-test="habit-create-cancel-btn">Cancelar</Cancelar>
+
+        <Confirm  type="submit" disabled={disable} data-test="habit-create-save-btn">
           {disable == true ? (
             <ThreeDots height="40" width="40" color="#ffffff" />
           ) : (
             "Salvar"
           )}
-        </button>
+        </Confirm>
       </ConfirmContainer>
     </Container>
   );
@@ -135,19 +138,11 @@ const ConfirmContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: 30px;
-  p {
-    font-family: "Lexend Deca";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 15.976px;
-    line-height: 20px;
-    text-align: center;
-    color: #52b6ff;
-    margin-right: 25px;
-    margin-top: 5px;
-  }
-  button {
-    width: 84px;
+
+`;
+
+const Confirm = styled.button`
+width: 84px;
     height: 35px;
     background: #52b6ff;
     border-radius: 5px;
@@ -161,5 +156,20 @@ const ConfirmContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-`;
+`
+
+const Cancelar = styled.button`
+    width: 84px;
+    height: 35px;
+    background: #fff;
+    border: none;
+    font-family: "Lexend Deca";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15.976px;
+    line-height: 20px;
+    text-align: center;
+    color: #52b6ff;
+    margin-right: 25px;
+    
+`
