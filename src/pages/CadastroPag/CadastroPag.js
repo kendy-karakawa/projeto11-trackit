@@ -27,9 +27,9 @@ export default function CadastroPag() {
   }
 
   function resposta() {
-    navigate("/");
     setLoarding(false);
     setDisable(false);
+    navigate("/");
   }
 
   function erro(err) {
