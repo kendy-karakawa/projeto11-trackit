@@ -67,6 +67,8 @@ export default function HojePag(){
     .catch((erro) => console.log(erro.message))
   }
 
+  
+
   //Math.round((concluidos.length/totalHabitosDia)*100)
 
     return (
@@ -75,7 +77,7 @@ export default function HojePag(){
         <ScreenContainer>
           <Title>
             <p data-test="today">{data}</p>
-            {concluidos.length/totalHabitosDia == 0 ? 
+            {!porcentagem  ? 
             <Subtitle textColor={"#BABABA"} data-test="today-counter"> Nenhum hábito concluído ainda </Subtitle> :
             <Subtitle textColor={"#8FC549"} data-test="today-counter"> {porcentagem}% dos hábitos concluídos</Subtitle>
             

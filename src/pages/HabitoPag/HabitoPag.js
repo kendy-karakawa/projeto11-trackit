@@ -23,6 +23,7 @@ export default function HabitoPag() {
     const request = axios.get(`${BASE_URL}/habits`, config);
     request.then((res) => {
       setListaHabitos(res.data);
+            
     });
     request.catch((erro) => console.log(erro.message));
   }, [deletar]);
@@ -33,6 +34,7 @@ export default function HabitoPag() {
       request.then(() => console.log("deletado"));
     }
   }
+
 
   return (
     <>
@@ -66,7 +68,7 @@ export default function HabitoPag() {
             />
           ))}
 
-        {listaHabitos === undefined && (
+        {listaHabitos != undefined && listaHabitos.length == 0  && (
           <Coment>
             Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
             começar a trackear!
