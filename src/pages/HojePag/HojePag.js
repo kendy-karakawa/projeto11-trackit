@@ -71,7 +71,7 @@ export default function HojePag(){
 
     return (
         <>
-        <Header />
+        <Header data-test="header"/>
         <ScreenContainer>
           <Title>
             <p data-test="today">{data}</p>
@@ -101,7 +101,7 @@ export default function HojePag(){
           
           
         </ScreenContainer>
-        <Menu />
+        <Menu data-test="menu"/>
       </>
     )
 }
