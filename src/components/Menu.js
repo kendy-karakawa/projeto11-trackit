@@ -8,7 +8,7 @@ import { AuthContext } from "../contexts/auth";
 export default function Menu() {
   const {porcentagem} = useContext(AuthContext)
   return (
-    <MenuContainer data-test="menu">
+    <MenuContainer >
       <Link to="/habitos" data-test="habit-link">
         <p>Hábitos</p>
       </Link>

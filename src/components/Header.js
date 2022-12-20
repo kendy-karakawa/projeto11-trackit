@@ -9,7 +9,7 @@ export default function Header() {
   const img = localStorage.getItem("img")
 
   return (
-    <HeaderContainer data-test="header">
+    <HeaderContainer >
       <img src={Logo2} alt="logo" />
       <Foto src={img || dadosUsuario.image} alt="Foto" />
     </HeaderContainer>
