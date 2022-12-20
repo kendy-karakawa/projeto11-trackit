@@ -43,10 +43,7 @@ export default function HabitoPag() {
           <button
             onClick={() => setCadastrar(true)}
             data-test="habit-create-btn"
-          >
-            {" "}
-            +{" "}
-          </button>
+          >+</button>
         </Title>
         {cadastrar === true && (
           <SetHabito

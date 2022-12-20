@@ -30,13 +30,13 @@ export default function LoginPag() {
   function resposta(res) {
     setDadosUsuario(res.data)
     console.log(res.data)
-    navigate("/hoje");
     setLoarding(false);
     setDisable(false);
     const token = res.data.token
     const img = res.data.image
     localStorage.setItem("key", token )
     localStorage.setItem("img", img)
+    navigate("/hoje");
   }
 
   function erro(err) {
