@@ -68,7 +68,10 @@ export default function LoginPag() {
           disabled={disable}
           data-test="password-input"
         />
-        <button type="submit" data-test="login-btn">
+        <button type="submit" 
+        data-test="login-btn"
+        disabled={disable}
+        >
           {loarding == true ? (
             <ThreeDots height="40" width="40" color="#ffffff" />
           ) : (
