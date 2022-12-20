@@ -36,7 +36,7 @@ export default function HabitoPag() {
 
   return (
     <>
-      <Header data-test="header"/>
+      <Header />
       <ScreenContainer>
         <Title>
           <p>Meus hábitos</p>
@@ -76,7 +76,7 @@ export default function HabitoPag() {
           </Coment>
         )}
       </ScreenContainer>
-      <Menu  data-test="menu"/>
+      <Menu />
     </>
   );
 }

@@ -7,7 +7,7 @@ import SetHabito from "../../components/SetHabito";
 export default function HistoricoPag(){
     return (
         <>
-      <Header data-test="header"/>
+      <Header />
       <ScreenContainer>
         <Title>
           <p>Histórico</p>
@@ -16,7 +16,7 @@ export default function HistoricoPag(){
         
         <Coment>Em breve você poderá ver o histórico dos seus hábitos aqui! </Coment>
       </ScreenContainer>
-      <Menu data-test="menu"/>
+      <Menu />
     </>
     )
 }

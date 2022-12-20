@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/auth";
 
 export default function Menu() {
-  const {porcentagem} = useContext(AuthContext)
+  const { porcentagem } = useContext(AuthContext);
   return (
-    <MenuContainer >
+    <MenuContainer data-test="menu">
       <Link to="/habitos" data-test="habit-link">
         <p>Hábitos</p>
       </Link>
-      
-        <div >
+
+      <div>
         <Link to="/hoje" data-test="today">
           <CircularProgressbar
             value={porcentagem}
@@ -27,9 +27,9 @@ export default function Menu() {
               trailColor: "transparent",
             })}
           />
-          </Link>
-        </div>
-      
+        </Link>
+      </div>
+
       <Link to="/historicos" data-test="history-link">
         <p>Histórico</p>
       </Link>
@@ -62,7 +62,7 @@ const MenuContainer = styled.div`
     height: 150px;
     padding: 10px;
   }
-  a{
-    text-decoration:none;
+  a {
+    text-decoration: none;
   }
 `;
