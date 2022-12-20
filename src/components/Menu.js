@@ -14,7 +14,7 @@ export default function Menu() {
       </Link>
 
       <div>
-        <Link to="/hoje" data-test="today">
+        <Link to="/hoje" data-test="today-link">
           <CircularProgressbar
             value={porcentagem}
             text="Hoje"
