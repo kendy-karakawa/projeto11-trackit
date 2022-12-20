@@ -73,7 +73,7 @@ export default function SetHabito({ setCadastrar,name, setName, days, setDays })
             dia={dia}
             days={days}
             setDays={setDays}
-            disabled={disable}
+            disable={disable}
           />
         ))}
       </ButtonContainer>

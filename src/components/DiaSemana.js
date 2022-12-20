@@ -4,7 +4,7 @@ import styled from "styled-components";
 const SELECT = { background: "#CFCFCF", text: "#FFFFFF", border: "#CFCFCF" };
 const UNSELECT = { background: "#FFFFFF", text: "#DBDBDB", border: "#DBDBDB" };
 
-export default function DiaSemana({ dia, days, setDays }) {
+export default function DiaSemana({ dia, days, setDays,disable }) {
   const id = dia.id;
   const name = dia.name;
   const [cor, setCor] = useState(days.includes(id) ? SELECT :UNSELECT);
@@ -24,7 +24,7 @@ export default function DiaSemana({ dia, days, setDays }) {
   
   return (
     <>
-      <Button type="button" onClick={selecionarDiaSemana} cor={cor} data-test="habit-day">
+      <Button type="button" onClick={selecionarDiaSemana} cor={cor} disabled={disable} data-test="habit-day">
         {name}
       </Button>
     </>
