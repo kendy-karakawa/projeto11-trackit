@@ -30,7 +30,7 @@ export default function HojePag(){
   const [refresh, setRefresh] = useState(true)
   
   useEffect(()=>{
-    const request = axios.get(`${BASE_URL}habits/today`, config)
+    const request = axios.get(`${BASE_URL}/habits/today`, config)
     request.then(resposta)
     request.catch((erro)=> console.log(erro.message))
     setRefresh(true)
